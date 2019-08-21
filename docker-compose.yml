@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  mariadb:
+    image: mariadb:10.4
+    environment:
+      MYSQL_DATABASE: breezy
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./docker:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
