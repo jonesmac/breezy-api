@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send(dummyData);
+  console.log('Inside the GET Users route');
+  console.log(req.sessionID);
+  res.status(200).send({ message: 'Here should be users' });
 });
 
 router.post('/', function (req, res, next) {

@@ -2,24 +2,31 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-require('./config/db')();
+// Connect the db
+require('./config/db').connect();
 
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
+// Third Party Express Imports
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
 
-var usersRouter = require('./components/users/usersAPI');
+// Import Routes
+const usersRouter = require('./components/users/usersAPI');
 
-var app = express();
-
+// Third Party Express Setup
+const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
+// Custom Express Setup
+require('./config/session').addSessions(app);
+
+// Wire up Routes to Express
 app.use('/api/v1/users', cors(), usersRouter);
+app.use(express.static(path.join(__dirname, 'public')));
 
 module.exports = app;
