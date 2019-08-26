@@ -11,7 +11,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const parseJSON = require('express').json;
 const strategy = require('./components/login/loginStrategy');
 strategy.setupPassport();
 
@@ -22,8 +22,7 @@ const loginRouter = require('./components/login/loginAPI');``
 // Third Party Express Setup
 const app = express();
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(parseJSON());
 app.use(cookieParser());
 
 // Custom Express Setup
