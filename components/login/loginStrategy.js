@@ -23,14 +23,11 @@ module.exports = {
     ));
 
     passport.serializeUser((user, done) => {
-      console.log('Inside serializeUser callback. User id is save to the session file store here');
       done(null, user.id);
     });
 
     passport.deserializeUser((id, done) => {
-      console.log('Inside deserializeUser callback')
-      console.log(`The user id passport saved in the session file store is: ${id}`)
-      const user = User.findOne({ where: { id }});
+      const user = User.findOne({ where: { id } });
       user
         .then(foundUser => done(null, foundUser))
         .catch(err => done(null, false, { message: 'User not found' }))
