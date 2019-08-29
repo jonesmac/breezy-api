@@ -9,8 +9,8 @@ module.exports = {
       password: bcrypt.hashSync('password', 10),
       createdAt: new Date(),
       updatedAt: new Date()
-    }]
-    return queryInterface.bulkInsert('Users', fields, {})
+    }];
+    return queryInterface.bulkInsert('Users', fields, { validate: true })
   },
 
   down: (queryInterface, Sequelize) => {

@@ -7,13 +7,13 @@ module.exports = {
     passport.use(new LocalStrategy(
       { usernameField: 'email' },
       async (email, password, done) => {
-        const currentUser = await User.findOne({ where: { email } })
-        if (currentUser.id) {
+        try {
+          const currentUser = await User.findOne({ where: { email } })
           const passwordMatch = await currentUser.verifyPassword(password);
           return passwordMatch ? 
             done(null, currentUser) :
             done(null, false, { message: 'Invalid credentials.\n' });
-        } else {
+        } catch {
           return done(null, false, { message: 'Invalid credentials.\n' });
         }
       }

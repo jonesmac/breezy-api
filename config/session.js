@@ -11,8 +11,6 @@ module.exports = {
   addSessions: (app) => {
     app.use(session({
       genid: (req) => {
-        console.log('Inside the session middleware');
-        console.log(req.sessionID);
         return uuid();
       },
       secret: process.env.SESSION_SECRET,
