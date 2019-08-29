@@ -6,19 +6,16 @@ module.exports = {
   setupPassport: function () {
     passport.use(new LocalStrategy(
       { usernameField: 'email' },
-      (email, password, done) => {
-        User.findOne({ where: { email } })
-          .then(foundUser => {
-            // TODO move to hash passwords and verifyPassword method on user model
-            if (foundUser.password === password) {
-              return done(null, foundUser)
-            } else {
-              return done(null, false, { message: 'Invalid credentials.\n' });
-            }
-          })
-          .catch(err => {
-            return done(null, false, { message: 'Invalid credentials.\n' });
-          });
+      async (email, password, done) => {
+        const currentUser = await User.findOne({ where: { email } })
+        if (currentUser.id) {
+          const passwordMatch = await currentUser.verifyPassword(password);
+          return passwordMatch ? 
+            done(null, currentUser) :
+            done(null, false, { message: 'Invalid credentials.\n' });
+        } else {
+          return done(null, false, { message: 'Invalid credentials.\n' });
+        }
       }
     ));
 
@@ -29,7 +26,7 @@ module.exports = {
     passport.deserializeUser((id, done) => {
       const user = User.findOne({ where: { id } });
       user
-        .then(foundUser => done(null, foundUser))
+        .then(currentUser => done(null, currentUser))
         .catch(err => done(null, false, { message: 'User not found' }))
     });
   },
