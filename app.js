@@ -2,36 +2,36 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
-var mysql = require('mysql');
+// Connect the db
+require('./config/db').connect();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// Third Party Express Imports
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
+const parseJSON = require('express').json;
+const strategy = require('./components/login/loginStrategy');
+strategy.setupPassport();
 
-var con = mysql.createConnection({
-  host: process.env.MYSQL_HOST,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD
-});
+// Import Routes
+const usersRouter = require('./components/users/usersAPI');
+const loginRouter = require('./components/login/loginAPI');``
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
-
-var app = express();
-
+// Third Party Express Setup
+const app = express();
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(parseJSON());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// Custom Express Setup
+require('./config/session').addSessions(app);
+strategy.addPassport(app);
+
+// Wire up Routes to Express
 app.use('/api/v1/users', cors(), usersRouter);
+app.use('/api/v1/login', cors(), loginRouter);
+app.use(express.static(path.join(__dirname, 'public')));
 
 module.exports = app;
