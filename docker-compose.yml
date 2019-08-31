@@ -3,7 +3,7 @@ version: '3'
 services:
   mariadb:
     image: mariadb:10.4
-    command: ['--wait_timeout=28800']
+    command: ['--interactive_timeout=28800', '--wait_timeout=28800']
     environment:
       MYSQL_DATABASE: breezy
       MYSQL_ROOT_PASSWORD: password
