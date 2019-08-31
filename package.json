@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "migrate": "sequelize db:migrate",
+    "seed": "sequelize db:seed:all",
     "sq": "sequelize"
   },
   "dependencies": {

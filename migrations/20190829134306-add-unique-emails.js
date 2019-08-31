@@ -5,7 +5,7 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction();
     try {
       await queryInterface.addIndex(
-        'User',
+        'Users',
         {
           fields: ['email'],
           unique: true,
@@ -23,7 +23,7 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction();
     try {
       await queryInterface.removeIndex(
-        'User',
+        'Users',
         {
           fields: ['email'],
           unique: false,

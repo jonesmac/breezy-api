@@ -36,7 +36,13 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'User'
   });
-
+  User.associate = (models) => {
+    const { Location, UserLocation } = models;
+    User.belongsToMany(
+      Location,
+      { through: UserLocation }
+    );
+  }
   User.sync();
   return User;
 };
