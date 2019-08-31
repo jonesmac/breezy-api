@@ -20,6 +20,9 @@ strategy.setupPassport();
 const usersRouter = require('./components/users/usersAPI');
 const loginRouter = require('./components/login/loginAPI');
 
+// Import Middleware
+const auth = require('./util/auth');
+
 // Third Party Express Setup
 const app = express();
 app.use(logger('dev'));
@@ -31,7 +34,7 @@ require('./config/session').addSessions(app);
 strategy.addPassport(app);
 
 // Wire up Routes to Express
-app.use('/api/v1/users', cors(), usersRouter);
+app.use('/api/v1/users', [cors(), auth], usersRouter);
 app.use('/api/v1/login', cors(), loginRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
