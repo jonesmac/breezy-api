@@ -1,16 +1,11 @@
 const locations = require('express').Router({ mergeParams: true });
 
-const { Location, User } = require('../../models');
+const { Location } = require('../../models');
 
 /* GET user locations */
 locations.get('/', async (req, res, err) => {
   const user = req.user;
-  const locations = await Location.findAll({
-    model: user,
-        through: {
-          attributes: []
-        }
-  })
+  const locations = await user.myLocations({ Location, user });
   res.status(200).send({ locations })
 });
 

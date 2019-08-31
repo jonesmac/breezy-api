@@ -7,6 +7,14 @@ module.exports = (sequelize) => {
     verifyPassword(password) {
       return bcrypt.compare(password, this.password);
     }
+    myLocations(context) {
+      return context.Location.findAll({
+        model: context.user,
+        through: {
+          attributes: []
+        }
+      });
+    }
   }
   User.init({
     firstName: Sequelize.STRING,
