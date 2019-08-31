@@ -2,8 +2,9 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-// Connect the db
+// Connect the db and models
 require('./config/db').connect();
+require('./models');
 
 // Third Party Express Imports
 const express = require('express');
@@ -17,7 +18,7 @@ strategy.setupPassport();
 
 // Import Routes
 const usersRouter = require('./components/users/usersAPI');
-const loginRouter = require('./components/login/loginAPI');``
+const loginRouter = require('./components/login/loginAPI');
 
 // Third Party Express Setup
 const app = express();
