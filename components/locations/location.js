@@ -12,7 +12,6 @@ module.exports = (sequelize, dataTypes) => {
     modelName: 'Location'
   });
   Location.associations = (models) => {
-    console.log('Inside location associations method: ', models);
     Location.belongsToMany(
       models.User,
       {
