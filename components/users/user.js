@@ -7,9 +7,9 @@ module.exports = (sequelize) => {
     verifyPassword(password) {
       return bcrypt.compare(password, this.password);
     }
-    myLocations(context) {
-      return context.Location.findAll({
-        model: context.user,
+    myLocations(user, Location) {
+      return Location.findAll({
+        model: user,
         through: {
           attributes: []
         }
