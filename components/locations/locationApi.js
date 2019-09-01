@@ -9,4 +9,9 @@ locations.get('/', async (req, res, err) => {
   res.status(200).send({ locations })
 });
 
+/* POST user locations */
+locations.post('/', async (req, res, err) => {
+  // TODO
+});
+
 module.exports = locations;
