@@ -1,6 +1,7 @@
 module.exports = {
   commonErrors: {
     resourceNotFound: 'Resource Not Found',
+    loginRequired: 'Login Required',
     internalError: 'Internal Server Error'
   },
   commonHTTPErrors: {
