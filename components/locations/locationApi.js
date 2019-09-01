@@ -1,12 +1,24 @@
 const locations = require('express').Router({ mergeParams: true });
-
 const { Location } = require('../../models');
+const { AppError } = require('../../util/errors/appError');
+const { commonErrors, commonHTTPErrors } = require('../../constants/errors');
 
 /* GET user locations */
 locations.get('/', async (req, res, err) => {
   const user = req.user;
-  const locations = await user.myLocations({ Location, user });
-  res.status(200).send({ locations })
+  try {
+    const locations = await user.myLocations({ Location, user });
+    res.status(200).send({ locations });
+  } catch (error) {
+    const errMessage = 'Failed when fetching locations';
+    res.status(commonHTTPErrors.internalError).send(errMessage)
+    throw new AppError(
+      commonErrors.internalError,
+      commonHTTPErrors.internalError,
+      errMessage,
+      false
+    );
+  }
 });
 
 /* POST user locations */
