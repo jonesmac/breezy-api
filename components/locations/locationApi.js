@@ -59,6 +59,12 @@ locations.delete('/:locationId', async (req, res, err) => {
     console.log(e);
     res.status(commonHTTPErrors.internalError).send('Location Deletion Failed');
   }
-})
+});
+
+/* PUT update user location */
+locations.put('/:locationId', async (req, res, err) => {
+  // TODO - check params
+  // TODO - implement
+});
 
 module.exports = locations;
