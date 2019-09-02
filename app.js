@@ -22,6 +22,7 @@ strategy.setupPassport();
 // Import Routes
 const usersRouter = require('./components/users/usersAPI');
 const loginRouter = require('./components/login/loginAPI');
+const locationsRouter = require('./components/locations/locationApi');
 
 // Import Middleware
 const auth = require('./util/auth');
@@ -37,8 +38,9 @@ require('./config/session').addSessions(app);
 strategy.addPassport(app);
 
 // Wire up Routes to Express
-app.use('/api/v1/users', [cors(), auth], usersRouter);
 app.use('/api/v1/login', cors(), loginRouter);
+app.use('/api/v1/users', [cors(), auth], usersRouter);
+app.use('/api/v1/locations', [cors(), auth], locationsRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 module.exports = app;

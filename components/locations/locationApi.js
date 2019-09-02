@@ -1,4 +1,4 @@
-const locations = require('express').Router({ mergeParams: true });
+const locations = require('express').Router();
 const User = require('../users');
 const { AppError } = require('../../util/errors/appError');
 const { commonErrors, commonHTTPErrors } = require('../../constants/errors');

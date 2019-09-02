@@ -1,5 +1,4 @@
 const users = require('express').Router();
-const locations = require('../locations/locationApi')
 
 /* GET users listing. */
 users.get('/', (req, res, next) => {
@@ -10,9 +9,8 @@ users.get('/', (req, res, next) => {
 
 /* POST user create */
 users.post('/', (req, res, next) => {
+  // TODO - implement User Creation
   res.status(201).send({ success: 'User Successfully Created'});
 });
-
-users.use('/:userId/locations', locations);
 
 module.exports = users;
