@@ -4,7 +4,9 @@ const Sequelize = require('sequelize');
 const inflection = require('inflection');
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config.js')[env];
+
 const db = {};
+const componentDir = `${__dirname }/../components/`;
 
 let sequelize;
 if (config.use_env_variable) {
@@ -12,8 +14,6 @@ if (config.use_env_variable) {
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
-
-const componentDir = `${__dirname }/../components/`;
 
 /* 
  * Loop through components directories and match the model 

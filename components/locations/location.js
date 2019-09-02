@@ -4,18 +4,33 @@ module.exports = (sequelize, dataTypes) => {
   const Model = Sequelize.Model;
   class Location extends Model {}
   Location.init({
-    zipcode: Sequelize.STRING,
-    label: Sequelize.STRING,
-    userLocationId: Sequelize.INTEGER
+    zipcode: {
+      type: Sequelize.STRING,
+      allowNull:false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    label: {
+      type: Sequelize.STRING,
+      allowNull:false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    userLocationId: {
+      type: Sequelize.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'Location'
   });
-  Location.associations = (models) => {
+  Location.associate = ({ User, UserLocation}) => {
     Location.belongsToMany(
-      models.User,
+      User,
       {
-        through: models.UserLocation,
+        through: UserLocation,
+        as: 'users'
       }
     );
   };

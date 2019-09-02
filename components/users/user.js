@@ -7,13 +7,8 @@ module.exports = (sequelize) => {
     verifyPassword(password) {
       return bcrypt.compare(password, this.password);
     }
-    myLocations(user, Location) {
-      return Location.findAll({
-        model: user,
-        through: {
-          attributes: []
-        }
-      });
+    myLocations(user) {
+      return user.getLocations()
     }
   }
   User.init({
@@ -44,11 +39,10 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'User'
   });
-  User.associate = (models) => {
-    const { Location, UserLocation } = models;
+  User.associate = ({ Location, UserLocation }) => {
     User.belongsToMany(
       Location,
-      { through: UserLocation }
+      { through: UserLocation, as: 'locations' }
     );
   }
   User.sync();
