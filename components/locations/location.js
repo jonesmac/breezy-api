@@ -17,9 +17,6 @@ module.exports = (sequelize, dataTypes) => {
       validate: {
         notEmpty: true
       }
-    },
-    userLocationId: {
-      type: Sequelize.INTEGER
     }
   }, {
     sequelize,
