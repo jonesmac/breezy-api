@@ -43,4 +43,22 @@ locations.post('/', async (req, res, err) => {
   }
 });
 
+/* DELETE user location */
+locations.delete('/:locationId', async (req, res, err) => {
+  // TODO - check params
+  const context = {
+    locationId: req.params.locationId,
+    user: req.user
+  };
+  try {
+    const deleteLocation = await Location.delete(context);
+    if (deleteLocation) {
+      res.status(200).send({ message: 'Deletion Successful' })
+    }
+  } catch(e) {
+    console.log(e);
+    res.status(commonHTTPErrors.internalError).send('Location Deletion Failed');
+  }
+})
+
 module.exports = locations;
