@@ -15,7 +15,15 @@ router.post('/', (req, res, next) => {
 
     req.login(user, (err) => {
       if (err) { return next(err); }
-      res.send({ success: `Successfully authenticated ${user.email}` });
+      res.send({ 
+        success: `Successfully authenticated ${user.email}`,
+        user: {
+          id: user.id,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName
+        }
+      });
     })
   })(req, res, next)
 })
