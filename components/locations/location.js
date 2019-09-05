@@ -8,7 +8,8 @@ module.exports = (sequelize, dataTypes) => {
       type: Sequelize.STRING,
       allowNull:false,
       validate: {
-        notEmpty: true
+        notEmpty: true,
+        isNumeric: true
       }
     },
     label: {

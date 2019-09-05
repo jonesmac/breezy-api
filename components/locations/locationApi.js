@@ -24,7 +24,7 @@ locations.get('/', async (req, res, err) => {
 });
 
 /* POST user locations */
-locations.post('/', async (req, res, err) => {
+locations.post('/new', async (req, res, err) => {
   // TODO - check params
   const context = {
     location: req.body.location,
@@ -44,7 +44,7 @@ locations.post('/', async (req, res, err) => {
 });
 
 /* DELETE user location */
-locations.delete('/:locationId', async (req, res, err) => {
+locations.delete('/delete/:locationId', async (req, res, err) => {
   // TODO - check params
   const context = {
     locationId: req.params.locationId,
