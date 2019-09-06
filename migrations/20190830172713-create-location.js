@@ -9,13 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       zipcode: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       label: {
-        type: Sequelize.STRING
-      },
-      userLocationId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
