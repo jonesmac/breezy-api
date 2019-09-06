@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const { User } = require('../../models');
+const User = require('../users');
 
 module.exports = {
   setupPassport: function () {
@@ -8,13 +8,13 @@ module.exports = {
       { usernameField: 'email' },
       async (email, password, done) => {
         try {
-          const currentUser = await User.findOne({ where: { email } })
+          const currentUser = await User.findByEmail(email);
           const passwordMatch = await currentUser.verifyPassword(password);
-          return passwordMatch ? 
+          passwordMatch ? 
             done(null, currentUser) :
             done(null, false, { message: 'Invalid credentials.\n' });
-        } catch {
-          return done(null, false, { message: 'Invalid credentials.\n' });
+        } catch (e) {
+          done(null, false, { message: 'Invalid credentials.\n' });
         }
       }
     ));
@@ -24,7 +24,7 @@ module.exports = {
     });
 
     passport.deserializeUser((id, done) => {
-      const user = User.findOne({ where: { id } });
+      const user = User.find(id);
       user
         .then(currentUser => done(null, currentUser))
         .catch(err => done(null, false, { message: 'User not found' }))
