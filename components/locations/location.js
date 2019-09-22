@@ -31,6 +31,19 @@ module.exports = (sequelize, dataTypes) => {
         as: 'users'
       }
     );
+    Location.addScope('forUser', (user, id) => ({
+      include: [{
+        // belongsToMany Relationship
+        model: User,
+        // alias
+        as: 'users',
+        // user field to match
+        where: { id: user.id },
+        // do not include any user attributes
+        attributes: []
+       }],
+       where: id ? { id } : null
+    }))
   };
   Location.sync();
   return Location;

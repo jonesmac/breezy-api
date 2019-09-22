@@ -46,6 +46,7 @@ app.use(cookieParser());
 // Custom Express Setup
 require('./config/session').addSessions(app);
 strategy.addPassport(app);
+require('./config/graphql')(app);
 
 // Wire up Routes to Express
 app.use('/api/v1/login', loginRouter);
