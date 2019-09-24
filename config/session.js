@@ -20,5 +20,6 @@ module.exports = {
     }))
     
     store.sync();
-  }
+  },
+  store
 }

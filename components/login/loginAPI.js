@@ -24,7 +24,7 @@ router.post('/', (req, res, next) => {
           lastName: user.lastName
         }
       });
-    })
+    });
   })(req, res, next)
 })
 
