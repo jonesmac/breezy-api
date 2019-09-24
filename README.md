@@ -19,6 +19,11 @@ The `.env.local` file has all the environment variables needed to run the applic
 * [SequelizeCLI](https://github.com/sequelize/cli) - database migrations and seeding
 * [ExpressJS](https://expressjs.com) - web framework for handling api calls
 * [PassportJS](http://www.passportjs.org/) - authentication for users
+* [ApolloServer](https://www.apollographql.com/docs/apollo-server/) - apollo server to handle graphql queries
+
+# GraphQL Notes
+* Playground accessible at `http://localhost:3000/graphql`
+* In the `Http Headers` section, update header with a valid session key that can be derived from the cookie generated when a valid login is generated (i.e. via postman)
 
 # Helpful Resources
 * [Node Best Practices](https://github.com/goldbergyoni/nodebestpractices)

@@ -37,7 +37,7 @@ const corsOptions = {
   credentials: true,
   origin: process.env.CORS_ALLOWED_ORIGIN,
   optionsSuccessStatus: 200
-}
+};
 app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(parseJSON());
