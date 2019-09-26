@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
+    "debug": "nodemon --inspect-brk ./bin/www",
     "migrate": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
     "sq": "sequelize"
