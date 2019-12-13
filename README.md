@@ -8,6 +8,7 @@ Breezy-API is a restful api that allows users to authenticate and save their fav
 # Environment Setup
 The `.env.local` file has all the environment variables needed to run the application locally.  In order to start the application, the following tasks should be done in the following order:
 
+* Copy .env.local to .env
 * In a standalone shell, `docker-compose up` to start the mariadb container with a default database.
 * In a standalone shell, `yarn` to install packages
 * `yarn migrate` to setup the db schema

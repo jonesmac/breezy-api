@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2019-12-13
+### Added
+- Check column exists before migrating
+- Update README / CHANGELOG
+
 ## [1.0.0] - 2019-09-06
 ### Added
 - Application/Database Setup
